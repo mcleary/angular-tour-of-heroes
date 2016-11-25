@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { HttpModule } from "@angular/http";
 
 import { AppComponent } from './app.component';
 import { HeroesComponent } from './heroes.component'
@@ -10,10 +11,15 @@ import { DashboardComponent } from './dashboard.component';
 
 import { AppRoutingModule } from "./app-routing.module";
 
+// Imports for loading and configuring the in-memory web api
+import { InMemoryWebApiModule } from 'angular-in-memory-web-api';
+import { InMemoryDataServer } from './in-memory-data.service';
+
 @NgModule({
   imports: [
     BrowserModule,
     FormsModule,
+    HttpModule,
     AppRoutingModule
   ],
   declarations: [
@@ -22,9 +28,7 @@ import { AppRoutingModule } from "./app-routing.module";
     HeroDetailComponent,
     DashboardComponent
   ],
-  providers: [
-    HeroService
-  ],
+  providers: [HeroService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
