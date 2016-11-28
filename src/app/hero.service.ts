@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core'
-import { Http } from "@angular/http";
+import { Headers, Http } from "@angular/http";
 
 import { Hero } from './hero';
 
@@ -9,6 +9,7 @@ import 'rxjs/add/operator/toPromise';
 @Injectable()
 export class HeroService {
 
+  private headers = new Headers({'Content-Type': 'application/json'});
   private heroesUrl = 'app/heroes';
 
   constructor(private http : Http) {}
@@ -28,6 +29,15 @@ export class HeroService {
   getHeroesSlowly(): Promise<Hero[]> {
     return new Promise<Hero[]>(resolve => setTimeout(resolve, 2000))
       .then(() => this.getHeroes());
+  }
+
+  update(hero : Hero) : Promise<Hero> {
+    const url = `${this.heroesUrl}/${hero.id}`;
+    return this.http
+      .put(url, JSON.stringify(hero), {headers: this.headers})
+      .toPromise()
+      .then(() => hero)
+      .catch(this.handleError);
   }
 
   private handleError(error: any): Promise<any> {
