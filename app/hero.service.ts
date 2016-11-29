@@ -10,19 +10,21 @@ import 'rxjs/add/operator/toPromise';
 export class HeroService {
 
   private headers = new Headers({'Content-Type': 'application/json'});
-  private heroesUrl = 'app/heroes';
+  private heroesUrl = 'http://localhost:5000/heroes';
 
   constructor(private http : Http) {}
 
   getHero(id: number) : Promise<Hero> {
+    console.log("Get Hero " + id);
     return this.getHeroes()
       .then(heroes => heroes.find(hero => hero.id === id));
   }
 
   getHeroes(): Promise<Hero[]> {
+    console.log("Hero Service: getHeroes() from url " + this.heroesUrl);
     return this.http.get(this.heroesUrl)
       .toPromise()
-      .then(response => response.json().data as Hero[])
+      .then(response => response.json() as Hero[])
       .catch(this.handleError);
   }
 
@@ -30,7 +32,7 @@ export class HeroService {
     return this.http
       .post(this.heroesUrl, JSON.stringify({ name: name }), { headers: this.headers })
       .toPromise()
-      .then(res => res.json().data)
+      .then(res => res.json())
       .catch(this.handleError);
   }
 
