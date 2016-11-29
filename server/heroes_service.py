@@ -1,8 +1,8 @@
 # -*- encoding: utf-8 -*-
-
 import json
 from flask import Flask, abort, request
 from flask_cors import cross_origin
+
 
 WEBAPP = Flask(__name__)
 
@@ -61,6 +61,26 @@ def hero_info(hero_id):
         if h.id == hero_id:
             return json.dumps(h, cls=HeroEncoder)
     return json.dumps({})
+
+
+@WEBAPP.route('/heroes', methods=['POST'])
+@cross_origin()
+def create_hero():
+    hero_name_json = request.get_json(silent=True)
+    new_hero_name = hero_name_json['name']
+
+    print("Creating hero %s" % new_hero_name)
+
+    # Get the new hero id
+    new_hero_id = hero_list[-1].id + 1
+
+    # Create the new hero
+    new_hero = Hero(new_hero_id, new_hero_name)
+
+    # Add the new hero to the list
+    hero_list.append(new_hero)
+
+    return json.dumps(new_hero, cls=HeroEncoder)
 
 
 @WEBAPP.route('/heroes/<int:hero_id>', methods=['DELETE'])
