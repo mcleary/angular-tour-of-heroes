@@ -123,5 +123,13 @@ def update_hero(hero_id):
         abort(400)
 
 
+@WEBAPP.route('/heroes/vs', methods=['POST'])
+@cross_origin()
+def heroes_vs():
+    heroes_json = request.get_json(silent=True)
+    print(heroes_json)
+    print("Fight starts")
+
+
 if __name__ == '__main__':
     WEBAPP.run(host='0.0.0.0', port=5000, debug=True)
