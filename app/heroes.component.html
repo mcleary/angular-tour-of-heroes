@@ -1,6 +1,6 @@
 <h2>My Heroes</h2>
 
-<div>
+<div *ngIf="!selectionOnly">
   <label>Hero name:</label><input #heroName />
   <button (click)="add(heroName.value); heroName.value=''">Add</button>
 </div>
@@ -11,11 +11,11 @@
       (click)="onSelect(hero)">
     <span class="badge">{{ hero.id }}</span>
     <span>{{ hero.name }}</span>
-    <button class="delete" (click)="delete(hero); $event.stopPropagation()">x</button>
+    <button *ngIf="!selectionOnly" class="delete" (click)="delete(hero); $event.stopPropagation()">x</button>
   </li>
 </ul>
 
-<div *ngIf="selectedHero">
+<div *ngIf="selectedHero && !selectionOnly">
   <h2>{{ selectedHero.name | uppercase }} is my hero!</h2>
   <button (click)="gotoDetails()">View Details</button>
 </div>

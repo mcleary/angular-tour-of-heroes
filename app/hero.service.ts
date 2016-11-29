@@ -10,7 +10,7 @@ import 'rxjs/add/operator/toPromise';
 export class HeroService {
 
   private headers = new Headers({'Content-Type': 'application/json'});
-  private heroesUrl = 'http://localhost:5000/heroes';
+  private heroesUrl = 'http://192.168.0.110:5000/heroes';
 
   constructor(private http : Http) {}
 
@@ -52,6 +52,15 @@ export class HeroService {
       .toPromise()
       .then(() => hero)
       .catch(this.handleError);
+  }
+
+  vs(hero1: Hero, hero2: Hero) : Promise<Hero> {
+    const url = `${this.heroesUrl}/vs`;
+    return this.http
+      .post(url, JSON.stringify([hero1, hero2]), {headers: this.headers})
+      .toPromise()
+      .then(res => res.json())
+      .catch(this.handleError)
   }
 
   private handleError(error: any): Promise<any> {

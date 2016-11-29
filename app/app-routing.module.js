@@ -13,6 +13,7 @@ var router_1 = require("@angular/router");
 var dashboard_component_1 = require("./dashboard.component");
 var hero_detail_component_1 = require("./hero-detail.component");
 var heroes_component_1 = require("./heroes.component");
+var hero_vs_component_1 = require("./hero-vs.component");
 var routes = [
     {
         path: '',
@@ -30,6 +31,10 @@ var routes = [
     {
         path: 'heroes',
         component: heroes_component_1.HeroesComponent
+    },
+    {
+        path: 'vs',
+        component: hero_vs_component_1.HeroVsComponent
     }
 ];
 var AppRoutingModule = (function () {

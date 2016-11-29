@@ -1,0 +1,30 @@
+
+<div class="arena">
+  <div class="left-corner">
+    <label>Right Corner:</label>
+    <select (change)="rightCornerChange($event.target.value)">
+      <option *ngFor="let hero of heroes"
+              value="{{ hero.id }}"
+              [attr.selected]="hero.id == hero1.id ? true : null">
+        {{ hero.name }}
+      </option>
+    </select>
+  </div>
+  <div class="right-corner">
+    <label>Left Corner:</label>
+    <select (change)="leftCorderChange($event.target.value)">
+      <option *ngFor="let hero of heroes"
+              value="{{ hero.id }}"
+              [attr.selected]="hero.id == hero2.id ? true : null">
+        {{ hero.name }}</option>
+    </select>
+  </div>
+</div>
+<div style="clear: both"></div>
+<div class="center-buttons">
+  <button (click)="fight()">Fight</button>
+</div>
+<div class="winner" *ngIf="winner">
+  <label>Winner is: </label>
+  <span>{{ winner.name }} !!!</span>
+</div>

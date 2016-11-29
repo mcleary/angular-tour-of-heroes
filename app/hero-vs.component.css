@@ -1,0 +1,38 @@
+.arena {
+  max-width: 30em;
+  font-size: 20px;
+}
+
+.left-corner {
+  float: left;
+}
+
+.right-corner {
+  float: right;
+}
+
+.center-buttons {
+  text-align: center;
+}
+
+.winner {
+  font-size: 40px;
+}
+
+select {
+  font-size: inherit;
+}
+
+button {
+  font-family: Arial;
+  font-size: 40px;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 4px;
+  cursor: hand;
+}
+
+button:hover {
+  background-color: #CFD8DC;
+  border: 1px solid red;
+}

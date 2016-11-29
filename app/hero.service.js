@@ -15,7 +15,7 @@ var HeroService = (function () {
     function HeroService(http) {
         this.http = http;
         this.headers = new http_1.Headers({ 'Content-Type': 'application/json' });
-        this.heroesUrl = 'http://localhost:5000/heroes';
+        this.heroesUrl = 'http://192.168.0.110:5000/heroes';
     }
     HeroService.prototype.getHero = function (id) {
         console.log("Get Hero " + id);
@@ -50,6 +50,14 @@ var HeroService = (function () {
             .put(url, JSON.stringify(hero), { headers: this.headers })
             .toPromise()
             .then(function () { return hero; })
+            .catch(this.handleError);
+    };
+    HeroService.prototype.vs = function (hero1, hero2) {
+        var url = this.heroesUrl + "/vs";
+        return this.http
+            .post(url, JSON.stringify([hero1, hero2]), { headers: this.headers })
+            .toPromise()
+            .then(function (res) { return res.json(); })
             .catch(this.handleError);
     };
     HeroService.prototype.handleError = function (error) {
